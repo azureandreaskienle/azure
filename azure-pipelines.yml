@@ -13,5 +13,12 @@ steps:
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(build.sourcesDirectory)'
-    includeRootFolder: false
 - task: PublishBuildArtifacts@1
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'akdeploymenttest - Azure'
+    appType: 'webApp'
+    WebAppName: 'akdeploymenttest'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    includeRootFolder: false
